@@ -94,7 +94,7 @@ Contract.prototype.generateContract = function (output) {
         var ${contractName}Contract = web3.eth.contract(${contract.interface});
         var ${contractName} = greeterContract.new(
           ${inputs ? `${inputs},\n` : ''}{
-            from: 'web3.eth.accounts[0]', 
+            from: web3.eth.accounts[0], 
             data: '0x${bytecode}', 
             gas: '${gas}'
           },
