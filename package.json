@@ -1,0 +1,28 @@
+{
+  "name": "contractor",
+  "version": "1.0.1-beta",
+  "description": "A basic compiler for ethereum solidity contracts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mingard/contractor.git"
+  },
+  "keywords": [
+    "ethereum",
+    "solidity",
+    "compiler"
+  ],
+  "author": "Arthur Mingard <admin@arthurmingard.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mingard/contractor/issues"
+  },
+  "homepage": "https://github.com/mingard/contractor#readme",
+  "dependencies": {
+    "solc": "^0.4.18",
+    "strip-comments": "^0.4.4"
+  }
+}
