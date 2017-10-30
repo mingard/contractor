@@ -17,7 +17,11 @@ const Contract = function () {
 }
 
 Contract.prototype.loadFrom = function (...contracts) {
-  this.sources = contracts.map(contract => fs.readFileSync(contract, 'utf8'))
+  this.sources = Object.assign({}, ...contracts.map(contract => {
+    const source = fs.readFileSync(contract, 'utf8')
+
+    return {[path.basename(contract)]: this.sanitizeSource(source)}
+  }))
 
   return this
 }
@@ -34,33 +38,31 @@ Contract.prototype.fileName = function(name) {
   return this
 }
 
-Contract.prototype.fromSources = function (...sources) {
-  this.sources = sources
+Contract.prototype.fromSources = function (sources) {
+  this.sources = Object.assign({}, ...Object.keys(sources).map(key => {
+    return {[key]: this.sanitizeSource(sources[key])}
+  }))
 
   return this
 }
 
-Contract.prototype.sanitizeSources = function () {
-  this.sources = this.sources.map(source => {
-    // Clear all comments and linebreaks
+Contract.prototype.sanitizeSource = function (source) {
     return source
       .replace(/(\r\n|\n|\r)/gm, '')
       .replace(/\/\*(.|[\r\n])*?\*\//g, '')
       .replace(/\/\/.*/gm, '')
-  })
 }
 
 Contract.prototype.generateOutputs = function () {
-  this.sources.map(source => {
-    const output = solc.compile(source, 1)
-    const contract = this.generateContract(output)
-    if (this.writeDir) {
-      this.src += contract
-    }
-    else {
-      console.log(`================= OUTPUT =================\n${contract}\n`)
-    }
-  })
+  const sources = this.sources
+  const output = solc.compile({sources}, 1)
+  const contract = this.generateContract(output)
+  if (this.writeDir) {
+    this.src = contract
+  }
+  else {
+    console.log(`================= OUTPUT =================\n${contract}\n`)
+  }
   this.writeFile()
 }
 
@@ -77,7 +79,7 @@ Contract.prototype.generateContract = function (output) {
   return Object.keys(output.contracts)
     .map(key => {
       const contract = output.contracts[key]
-      const contractName = key.replace(':', '')
+      const contractName = key.split(':')[1]
       const interfaces = JSON.parse(contract.interface)
       const inputs = interfaces
         .map(interface => {
@@ -104,7 +106,6 @@ Contract.prototype.generateContract = function (output) {
 }
 
 Contract.prototype.compile = function () {
-  this.sanitizeSources()
   this.generateOutputs()
 }
 

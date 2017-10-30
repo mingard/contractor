@@ -37,10 +37,11 @@ const greeter = fs.readFileSync(greeterPath, 'utf8')
 
 const contracts = new Contract()
   .fromSources(
-    greeter
+    {
+      'greeter.sol': greeter
+    }
   )
   .writeTo(path.resolve(__dirname, './output'))
   .fileName('greeter.js')
   .compile() 
-
 ```

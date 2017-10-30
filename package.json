@@ -1,6 +1,6 @@
 {
   "name": "solc-contract",
-  "version": "1.0.2-beta",
+  "version": "1.0.4-beta",
   "description": "A basic compiler for ethereum solidity contracts",
   "main": "index.js",
   "scripts": {
