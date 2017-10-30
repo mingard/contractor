@@ -1,5 +1,5 @@
 {
-  "name": "contractor",
+  "name": "solc-contract",
   "version": "1.0.1-beta",
   "description": "A basic compiler for ethereum solidity contracts",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mingard/contractor.git"
+    "url": "git+https://github.com/mingard/solc-contract.git"
   },
   "keywords": [
     "ethereum",
@@ -18,9 +18,9 @@
   "author": "Arthur Mingard <admin@arthurmingard.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mingard/contractor/issues"
+    "url": "https://github.com/mingard/solc-contract/issues"
   },
-  "homepage": "https://github.com/mingard/contractor#readme",
+  "homepage": "https://github.com/mingard/solc-contract#readme",
   "dependencies": {
     "solc": "^0.4.18",
     "strip-comments": "^0.4.4"
