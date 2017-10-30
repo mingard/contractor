@@ -100,6 +100,7 @@ Contract.prototype.generateContract = function (output) {
           },
           ${successMethod})`
     })
+    .join('')
 }
 
 Contract.prototype.compile = function () {
